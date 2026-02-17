@@ -1,8 +1,9 @@
 {
-  "name": "personal-website",
+  "name": "portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "pnpm@10.29.3",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
