@@ -7,3 +7,4 @@ dist
 .env.*
 *.md
 .DS_Store
+package-lock.json

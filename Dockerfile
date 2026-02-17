@@ -11,7 +11,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
-RUN pnpm run build
+RUN NODE_OPTIONS="--max-old-space-size=4096" pnpm exec vite build
 
 # Serve stage
 FROM nginx:alpine
