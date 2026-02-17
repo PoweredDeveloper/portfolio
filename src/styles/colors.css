@@ -1,0 +1,34 @@
+@theme {
+  /* Base themed colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-pale: var(--pale);
+
+  --color-select-background: var(--select-background);
+  --color-select-foreground: var(--select-foreground);
+}
+
+:root {
+  color-scheme: light;
+
+  --background: #fafafa;
+  --foreground: #282828;
+
+  --pale: #7d7d7d;
+
+  --select-background: #373737;
+  --select-foreground: #dedede;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: #000000;
+  --foreground: #ebebeb;
+
+  --pale: #868686;
+
+  --select-background: #dedede;
+  --select-foreground: #1f1f1f;
+}

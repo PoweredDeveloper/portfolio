@@ -1,0 +1,23 @@
+{
+  "portfolio": {
+    "header": {
+      "name": "Mikhail Istomin",
+      "profession": "Fullstack developer",
+      "website": "Website",
+      "location": "Innopolis, Russia"
+    },
+    "about": {
+      "title": "About",
+      "text": "I am an 18-year-old self-taught programmer from Kazan. Currently studying Data Science & AI at Innopolis University."
+    },
+    "skills": {
+      "title": "Skills",
+      "frontend_title": "Frontend",
+      "backend_title": "Backend",
+      "tools_title": "Tools"
+    },
+    "contacts": {
+      "title": "Contacts"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "portfolio": {
+    "header": {
+      "name": "ミハイル・イストミン",
+      "profession": "フルスタック開発者",
+      "website": "ウェブサイト",
+      "location": "ロシア・イノポリス"
+    },
+    "about": {
+      "title": "自己紹介",
+      "text": "僕はカザン出身の18歳の独学プログラマーです。現在、イノポリス大学でデータサイエンスとAIを勉強しています。"
+    },
+    "skills": {
+      "title": "スキル",
+      "frontend_title": "フロントエンド",
+      "backend_title": "バックエンド",
+      "tools_title": "ツール"
+    },
+    "contacts": {
+      "title": "連絡先"
+    }
+  }
+}
