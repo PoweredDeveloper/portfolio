@@ -21,8 +21,8 @@ export default function ThemeToggle({ className }: { className?: string }) {
   }
 
   return (
-    <button onClick={handleThemeChange} className={clsx('group cursor-pointer text-white', className)}>
-      [<span className="text-pale group-hover:text-white">{isDark ? 'L' : 'D'}</span>]
+    <button onClick={handleThemeChange} className={clsx('group text-foreground cursor-pointer', className)}>
+      [<span className="text-pale group-hover:text-foreground">{isDark ? 'L' : 'D'}</span>]
     </button>
   )
 }

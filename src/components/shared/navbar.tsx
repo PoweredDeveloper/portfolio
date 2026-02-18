@@ -20,7 +20,7 @@ const routes: { path: string; label: string; external?: boolean }[] = [
 ]
 
 export default function Navbar() {
-  const [time, setTime] = useState<number>(0)
+  const [time, setTime] = useState<number>(() => Date.now())
 
   useEffect(() => {
     const interval = setInterval(() => setTime(Date.now()), 1000)

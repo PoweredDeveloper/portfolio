@@ -4,7 +4,7 @@ services:
     container_name: portfolio
     networks:
       - proxy-net
-    restart: unless-stopped
+    restart: always
 
 networks:
   proxy-net:
