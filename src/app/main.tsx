@@ -5,7 +5,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 
 import '@/lib/i18n'
-import NotFoundPage from '@/components/pages/NotFoundPage'
+import NotFoundPage from '@/components/pages/not-found-page'
 
 const router = createRouter({
   routeTree,

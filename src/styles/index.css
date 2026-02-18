@@ -4,54 +4,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @import './colors.css' layer(theme);
+@import './globals.css';
+@import './not-found-effects.css';
 
 @theme {
   --font-ibm-mono: 'IBM Plex Mono', monospace;
-}
-
-/* CRT Filter Effects */
-.crt-filter {
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 10px 10px rgb(75, 117, 255) 40px;
-}
-
-.crt-filter::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 120, 0.2) 2px, transparent 2px, transparent 4px);
-  pointer-events: none;
-  z-index: 1;
-  mix-blend-mode: overlay;
-}
-
-.crt-filter::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.2) 100%);
-  pointer-events: none;
-  z-index: 2;
-  mix-blend-mode: multiply;
-}
-
-@keyframes crt-flicker {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.98;
-  }
-}
-
-.crt-filter {
-  animation: crt-flicker 0.15s infinite;
 }

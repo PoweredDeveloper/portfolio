@@ -1,21 +1,15 @@
 import { createRootRoute, Outlet, useLocation } from '@tanstack/react-router'
-import BackgroundNoise from '@/components/BackgroundNoise'
+// import BackgroundNoise from '@/components/background-noise'
 
 const RootLayout = () => {
   const location = useLocation()
   const isPortfolio = location.pathname === '/portfolio'
 
-  if (isPortfolio) {
-    return (
-      <>
-        <Outlet />
-      </>
-    )
-  }
+  if (isPortfolio) return <Outlet />
 
   return (
     <>
-      <BackgroundNoise pixelSize={1} opacity={18} frameSkip={3} />
+      {/* <BackgroundNoise pixelSize={1} opacity={16} frameSkip={2} /> */}
       <Outlet />
     </>
   )

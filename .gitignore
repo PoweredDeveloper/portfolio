@@ -10,6 +10,7 @@ lerna-debug.log*
 .tanstack
 node_modules
 dist
+src/app/routeTree.gen.ts
 dist-ssr
 *.local
 

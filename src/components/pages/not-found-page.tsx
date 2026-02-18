@@ -20,7 +20,7 @@ export default function NotFoundPage() {
   return (
     <div className="selection:bg-select-background selection:text-select-foreground flex h-screen items-center justify-center">
       <div className="crt-filter flex flex-col">
-        <div className={`bg-brig relative flex aspect-square h-[512px] flex-col justify-center bg-[url("/clouds_1.jpeg")] bg-contain p-4 text-white brightness-125`}>
+        <div className={`bg-brig text-foreground relative flex aspect-square h-[512px] flex-col justify-center bg-[url("/clouds.jpeg")] bg-contain p-4 brightness-125`}>
           <h1 className="flex items-center text-4xl font-semibold">
             <img src="https://malgow.net/images/Windows%20XP%20Simulator.png" className="mr-2 h-9 w-9" />
             Error 404

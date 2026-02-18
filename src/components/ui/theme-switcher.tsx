@@ -1,8 +1,5 @@
+import clsx from 'clsx'
 import { useState } from 'react'
-
-// Icons
-import { LuSun } from 'react-icons/lu'
-import { LuMoon } from 'react-icons/lu'
 
 const STORAGE_THEME_KEY = 'theme'
 
@@ -13,7 +10,7 @@ function getInitialTheme(): boolean {
   return window.matchMedia('(prefers-color-scheme: dark)').matches
 }
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ className }: { className?: string }) {
   const [isDark, setIsDark] = useState<boolean>(getInitialTheme)
 
   const handleThemeChange = () => {
@@ -24,8 +21,8 @@ export default function ThemeToggle() {
   }
 
   return (
-    <button onClick={handleThemeChange} className="bg-surface hover:bg-surface-2 cursor-pointer rounded-full p-2">
-      {isDark ? <LuSun className="size-7" /> : <LuMoon className="size-7" />}
+    <button onClick={handleThemeChange} className={clsx('text-pale hover:text-foreground cursor-pointer', className)}>
+      [{isDark ? 'L' : 'D'}]
     </button>
   )
 }

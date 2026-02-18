@@ -1,0 +1,3 @@
+.navbar-link {
+  @apply text-pale hover:text-foreground [&.active]:text-foreground flex items-center gap-2 font-light underline-offset-4 [&.active]:font-normal;
+}

@@ -8,3 +8,4 @@ dist
 *.md
 .DS_Store
 package-lock.json
+src/app/routeTree.gen.ts
