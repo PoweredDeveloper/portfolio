@@ -11,13 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'pnpm'
 
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run build # очень советую
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm lint
+
+      - run: pnpm build
 
   deploy:
     needs: lint
