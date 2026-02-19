@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import AsciiImage from '@/components/effects/ascii-image'
 
-const IMAGES = [1, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+const IMAGES = [1, 3, 4, 5]
 
 export default function Home() {
   const [image, setImage] = useState<string>('1.jpeg')
