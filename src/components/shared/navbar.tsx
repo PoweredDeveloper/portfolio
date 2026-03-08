@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { Fragment, useEffect, useState } from 'react'
 import { GrFormNextLink } from 'react-icons/gr'
 import ThemeToggle from '../ui/theme-switcher'
+import { cn } from '@/lib/cn'
 
 const routes: { path: string; label: string; external?: boolean }[] = [
   {
@@ -9,8 +10,8 @@ const routes: { path: string; label: string; external?: boolean }[] = [
     label: 'Home Page',
   },
   {
-    path: '/music',
-    label: 'Music',
+    path: '/guides',
+    label: 'Guides',
   },
   {
     path: '/portfolio',
@@ -19,7 +20,7 @@ const routes: { path: string; label: string; external?: boolean }[] = [
   },
 ]
 
-export default function Navbar() {
+export default function Navbar({ className }: { className?: string }) {
   const [time, setTime] = useState<number>(() => Date.now())
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav className="font-ibm-mono w-full px-8 py-8 font-light select-none lg:py-14">
+    <nav className={cn('font-ibm-mono w-full px-8 py-8 font-light select-none lg:py-14', className)}>
       <div className="mx-auto flex flex-col items-center justify-between gap-6 md:gap-4 lg:max-w-3xl lg:flex-row lg:gap-0 xl:max-w-5xl">
         {/* Title and time */}
         <div className="flex gap-8">
@@ -64,12 +65,15 @@ export default function Navbar() {
           ))}
         </div>
         {/* Links Mobile */}
-        <div className="flex w-full items-center justify-center lg:hidden">
+        {/* <div className="flex w-full items-center justify-center gap-6 lg:hidden">
+          <Link to="/guides" className="navbar-link">
+            Guides
+          </Link>
           <Link to="/portfolio" className="navbar-link flex items-center gap-1">
             Portfolio
             <GrFormNextLink />
           </Link>
-        </div>
+        </div> */}
       </div>
     </nav>
   )

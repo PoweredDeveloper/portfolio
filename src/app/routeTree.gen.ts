@@ -10,11 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root';
 import { Route as PortfolioRouteImport } from './routes/portfolio';
+import { Route as GuidesRouteRouteImport } from './routes/guides/route';
 import { Route as IndexRouteImport } from './routes/index';
+import { Route as GuidesIndexRouteImport } from './routes/guides/index';
+import { Route as GuidesCategoryRouteRouteImport } from './routes/guides/$category/route';
+import { Route as GuidesCategoryIndexRouteImport } from './routes/guides/$category/index';
+import { Route as GuidesCategorySplatRouteImport } from './routes/guides/$category/$';
 
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any);
+const GuidesRouteRoute = GuidesRouteRouteImport.update({
+  id: '/guides',
+  path: '/guides',
   getParentRoute: () => rootRouteImport,
 } as any);
 const IndexRoute = IndexRouteImport.update({
@@ -22,30 +32,84 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any);
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GuidesRouteRoute,
+} as any);
+const GuidesCategoryRouteRoute = GuidesCategoryRouteRouteImport.update({
+  id: '/$category',
+  path: '/$category',
+  getParentRoute: () => GuidesRouteRoute,
+} as any);
+const GuidesCategoryIndexRoute = GuidesCategoryIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GuidesCategoryRouteRoute,
+} as any);
+const GuidesCategorySplatRoute = GuidesCategorySplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => GuidesCategoryRouteRoute,
+} as any);
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute;
+  '/guides': typeof GuidesRouteRouteWithChildren;
   '/portfolio': typeof PortfolioRoute;
+  '/guides/$category': typeof GuidesCategoryRouteRouteWithChildren;
+  '/guides/': typeof GuidesIndexRoute;
+  '/guides/$category/$': typeof GuidesCategorySplatRoute;
+  '/guides/$category/': typeof GuidesCategoryIndexRoute;
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute;
   '/portfolio': typeof PortfolioRoute;
+  '/guides': typeof GuidesIndexRoute;
+  '/guides/$category/$': typeof GuidesCategorySplatRoute;
+  '/guides/$category': typeof GuidesCategoryIndexRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   '/': typeof IndexRoute;
+  '/guides': typeof GuidesRouteRouteWithChildren;
   '/portfolio': typeof PortfolioRoute;
+  '/guides/$category': typeof GuidesCategoryRouteRouteWithChildren;
+  '/guides/': typeof GuidesIndexRoute;
+  '/guides/$category/$': typeof GuidesCategorySplatRoute;
+  '/guides/$category/': typeof GuidesCategoryIndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/portfolio';
+  fullPaths:
+    | '/'
+    | '/guides'
+    | '/portfolio'
+    | '/guides/$category'
+    | '/guides/'
+    | '/guides/$category/$'
+    | '/guides/$category/';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/portfolio';
-  id: '__root__' | '/' | '/portfolio';
+  to:
+    | '/'
+    | '/portfolio'
+    | '/guides'
+    | '/guides/$category/$'
+    | '/guides/$category';
+  id:
+    | '__root__'
+    | '/'
+    | '/guides'
+    | '/portfolio'
+    | '/guides/$category'
+    | '/guides/'
+    | '/guides/$category/$'
+    | '/guides/$category/';
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
+  GuidesRouteRoute: typeof GuidesRouteRouteWithChildren;
   PortfolioRoute: typeof PortfolioRoute;
 }
 
@@ -58,6 +122,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    '/guides': {
+      id: '/guides';
+      path: '/guides';
+      fullPath: '/guides';
+      preLoaderRoute: typeof GuidesRouteRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/': {
       id: '/';
       path: '/';
@@ -65,11 +136,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    '/guides/': {
+      id: '/guides/';
+      path: '/';
+      fullPath: '/guides/';
+      preLoaderRoute: typeof GuidesIndexRouteImport;
+      parentRoute: typeof GuidesRouteRoute;
+    };
+    '/guides/$category': {
+      id: '/guides/$category';
+      path: '/$category';
+      fullPath: '/guides/$category';
+      preLoaderRoute: typeof GuidesCategoryRouteRouteImport;
+      parentRoute: typeof GuidesRouteRoute;
+    };
+    '/guides/$category/': {
+      id: '/guides/$category/';
+      path: '/';
+      fullPath: '/guides/$category/';
+      preLoaderRoute: typeof GuidesCategoryIndexRouteImport;
+      parentRoute: typeof GuidesCategoryRouteRoute;
+    };
+    '/guides/$category/$': {
+      id: '/guides/$category/$';
+      path: '/$';
+      fullPath: '/guides/$category/$';
+      preLoaderRoute: typeof GuidesCategorySplatRouteImport;
+      parentRoute: typeof GuidesCategoryRouteRoute;
+    };
   }
 }
 
+interface GuidesCategoryRouteRouteChildren {
+  GuidesCategorySplatRoute: typeof GuidesCategorySplatRoute;
+  GuidesCategoryIndexRoute: typeof GuidesCategoryIndexRoute;
+}
+
+const GuidesCategoryRouteRouteChildren: GuidesCategoryRouteRouteChildren = {
+  GuidesCategorySplatRoute: GuidesCategorySplatRoute,
+  GuidesCategoryIndexRoute: GuidesCategoryIndexRoute,
+};
+
+const GuidesCategoryRouteRouteWithChildren =
+  GuidesCategoryRouteRoute._addFileChildren(GuidesCategoryRouteRouteChildren);
+
+interface GuidesRouteRouteChildren {
+  GuidesCategoryRouteRoute: typeof GuidesCategoryRouteRouteWithChildren;
+  GuidesIndexRoute: typeof GuidesIndexRoute;
+}
+
+const GuidesRouteRouteChildren: GuidesRouteRouteChildren = {
+  GuidesCategoryRouteRoute: GuidesCategoryRouteRouteWithChildren,
+  GuidesIndexRoute: GuidesIndexRoute,
+};
+
+const GuidesRouteRouteWithChildren = GuidesRouteRoute._addFileChildren(
+  GuidesRouteRouteChildren,
+);
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GuidesRouteRoute: GuidesRouteRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
 };
 export const routeTree = rootRouteImport

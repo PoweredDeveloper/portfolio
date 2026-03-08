@@ -1,5 +1,7 @@
+// import Footer from '@/components/shared/footer'
+import Navbar from '@/components/shared/navbar'
 import { createRootRoute, Outlet, useLocation } from '@tanstack/react-router'
-// import BackgroundNoise from '@/components/background-noise'
+import BackgroundNoise from '@/components/effects/background-noise'
 
 const RootLayout = () => {
   const location = useLocation()
@@ -8,10 +10,15 @@ const RootLayout = () => {
   if (isPortfolio) return <Outlet />
 
   return (
-    <>
-      {/* <BackgroundNoise pixelSize={1} opacity={16} frameSkip={2} /> */}
-      <Outlet />
-    </>
+    <div className="flex h-screen flex-col">
+      <BackgroundNoise pixelSize={1} opacity={18} frameSkip={3} tileSize={128} />
+      <Navbar className="flex-0" />
+      <main className="font-ibm-mono min-h-0 flex-1">
+        <Outlet />
+      </main>
+      {/* <Footer /> */}
+      {/* Guest Book? */}
+    </div>
   )
 }
 

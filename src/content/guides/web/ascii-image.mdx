@@ -1,0 +1,382 @@
+---
+title: AsciiImage Component
+description: Turn images or text into ASCII art with reveal animations and idle effects
+---
+
+# AsciiImage Component
+
+Renders images or text as ASCII art. Provide exactly one of `imageUrl` or `text`.
+
+## Two Modes
+
+### Image Mode (`imageUrl`)
+
+Converts a photo to ASCII characters by mapping pixel brightness to a charset. Supports reveal animation and idle: subtle pixel mutation to similar characters (same brightness) so the image stays recognizable but alive.
+
+### Text Mode (`text`)
+
+Displays text with reveal effects. Two reveal modes:
+
+- **`messy`**: Fills the container with random chars, centers your text, then reveals it one character at a time. Best when the container is larger than the text.
+- **`empty`**: Shuffling chars settle into the final text.
+
+Idle spawns random chars in space positions (main text is never touched). With `fade: true`, chars fade in and out instead of popping.
+
+---
+
+## Options Structure
+
+All settings live under the `options` prop:
+
+```tsx
+options={{
+  display: { fontSize, scale, cols, rows, textClassName, messyClassName, charset },
+  imageProcessing: { contrast, sharpness },  // image mode only
+  animation: { animated, duration, revealMode, messinessThreshold, speedFunction },
+  idle: { enabled, interval, imageChangeFraction, fade },
+}}
+```
+
+**display**: `fontSize` (12), `scale` (1), `cols`/`rows` (image mode), `textClassName` ("text-foreground"), `messyClassName` ("text-pale font-light"), `charset`
+
+**imageProcessing** (image mode): `contrast` (1), `sharpness` (1)
+
+**animation**: `animated` (false), `duration` (3000), `revealMode` ("messy" | "empty"), `messinessThreshold` (0.3), `speedFunction`
+
+**idle**: `enabled` (false), `interval` (2000), `imageChangeFraction` (0.01, image mode), `fade` (false, text mode)
+
+---
+
+## Image Mode Examples
+
+### Basic image
+
+```tsx
+<AsciiImage
+  imageUrl="/photo.jpg"
+  className="max-w-md"
+/>
+```
+
+### Image with animation and idle
+
+```tsx
+<AsciiImage
+  imageUrl="/photo.jpg"
+  options={{
+    display: { cols: 80, rows: 40, fontSize: 8 },
+    animation: { animated: true, duration: 2000 },
+    idle: {
+      enabled: true,
+      interval: 1500,
+      imageChangeFraction: 0.02,
+    },
+  }}
+/>
+```
+
+---
+
+## Text Mode Examples
+
+### Static (no animation)
+
+```tsx
+<AsciiImage
+  text="Static"
+  className="h-20 w-full"
+  options={{
+    display: {
+      fontSize: 22,
+      textClassName: 'text-foreground font-bold',
+    },
+  }}
+/>
+```
+
+<AsciiImage
+  text="Static"
+  className="my-6 h-20 w-full"
+  options={{
+    display: {
+      fontSize: 22,
+      textClassName: 'text-foreground font-bold',
+    },
+  }}
+/>
+
+### Messy reveal
+
+```tsx
+<AsciiImage
+  text="Reveal"
+  className="h-24 w-full"
+  options={{
+    display: {
+      fontSize: 20,
+      textClassName: 'text-foreground font-semibold',
+      messyClassName: 'text-pale font-light',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'messy',
+      duration: 1500,
+      messinessThreshold: 0.3,
+    },
+  }}
+/>
+```
+
+<AsciiImage
+  text="Reveal"
+  className="my-6 h-24 w-full"
+  options={{
+    display: {
+      fontSize: 20,
+      textClassName: 'text-foreground font-semibold',
+      messyClassName: 'text-pale font-light',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'messy',
+      duration: 1500,
+      messinessThreshold: 0.3,
+    },
+  }}
+/>
+
+### Empty reveal
+
+```tsx
+<AsciiImage
+  text="Empty"
+  className="h-20 w-full"
+  options={{
+    display: {
+      fontSize: 20,
+      textClassName: 'text-foreground',
+      messyClassName: 'text-pale',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'empty',
+      duration: 1200,
+    },
+  }}
+/>
+```
+
+<AsciiImage
+  text="Empty"
+  className="my-6 h-20 w-full"
+  options={{
+    display: {
+      fontSize: 20,
+      textClassName: 'text-foreground',
+      messyClassName: 'text-pale',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'empty',
+      duration: 1200,
+    },
+  }}
+/>
+
+### Idle twinkle (no fade)
+
+```tsx
+<AsciiImage
+  text="Twinkle"
+  className="h-24 w-full"
+  options={{
+    display: {
+      fontSize: 18,
+      textClassName: 'text-foreground font-medium',
+      messyClassName: 'text-pale font-extralight',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'messy',
+      duration: 1000,
+      messinessThreshold: 0.2,
+    },
+    idle: {
+      enabled: true,
+      interval: 1500,
+    },
+  }}
+/>
+```
+
+<AsciiImage
+  text="Twinkle"
+  className="my-6 h-24 w-full"
+  options={{
+    display: {
+      fontSize: 18,
+      textClassName: 'text-foreground font-medium',
+      messyClassName: 'text-pale font-extralight',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'messy',
+      duration: 1000,
+      messinessThreshold: 0.2,
+    },
+    idle: {
+      enabled: true,
+      interval: 1500,
+    },
+  }}
+/>
+
+### Idle with fade (twinkling stars)
+
+```tsx
+<AsciiImage
+  text="Stars"
+  className="h-24 w-full"
+  options={{
+    display: {
+      fontSize: 18,
+      textClassName: 'text-foreground font-semibold',
+      messyClassName: 'text-pale font-extralight',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'messy',
+      duration: 1000,
+      messinessThreshold: 0.2,
+    },
+    idle: {
+      enabled: true,
+      interval: 2000,
+      fade: true,
+    },
+  }}
+/>
+```
+
+<AsciiImage
+  text="Stars"
+  className="my-6 h-24 w-full"
+  options={{
+    display: {
+      fontSize: 18,
+      textClassName: 'text-foreground font-semibold',
+      messyClassName: 'text-pale font-extralight',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'messy',
+      duration: 1000,
+      messinessThreshold: 0.2,
+    },
+    idle: {
+      enabled: true,
+      interval: 2000,
+      fade: true,
+    },
+  }}
+/>
+
+### Multi-line text
+
+```tsx
+<AsciiImage
+  text="Hello\nWorld"
+  className="h-28 w-full"
+  options={{
+    display: {
+      fontSize: 16,
+      textClassName: 'text-foreground font-semibold',
+      messyClassName: 'text-pale font-light',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'messy',
+      duration: 1800,
+      messinessThreshold: 0.25,
+    },
+    idle: {
+      enabled: true,
+      interval: 2000,
+      fade: true,
+    },
+  }}
+/>
+```
+
+<AsciiImage
+  text="Hello\nWorld"
+  className="my-6 h-28 w-full"
+  options={{
+    display: {
+      fontSize: 16,
+      textClassName: 'text-foreground font-semibold',
+      messyClassName: 'text-pale font-light',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'messy',
+      duration: 1800,
+      messinessThreshold: 0.25,
+    },
+    idle: {
+      enabled: true,
+      interval: 2000,
+      fade: true,
+    },
+  }}
+/>
+
+### Full demo (title-style)
+
+```tsx
+<AsciiImage
+  text="AsciiImage"
+  className="h-32 w-full"
+  options={{
+    display: {
+      fontSize: 24,
+      textClassName: 'text-foreground font-semibold',
+      messyClassName: 'text-pale font-extralight',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'messy',
+      duration: 1200,
+      messinessThreshold: 0.2,
+    },
+    idle: {
+      enabled: true,
+      interval: 2000,
+      fade: true,
+    },
+  }}
+/>
+```
+
+<AsciiImage
+  text="AsciiImage"
+  className="my-6 h-32 w-full"
+  options={{
+    display: {
+      fontSize: 24,
+      textClassName: 'text-foreground font-semibold',
+      messyClassName: 'text-pale font-extralight',
+    },
+    animation: {
+      animated: true,
+      revealMode: 'messy',
+      duration: 1200,
+      messinessThreshold: 0.2,
+    },
+    idle: {
+      enabled: true,
+      interval: 2000,
+      fade: true,
+    },
+  }}
+/>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <script>
-      (function () {
+      ;(function () {
         var stored = localStorage.getItem('theme')
         var dark = stored !== null ? JSON.parse(stored) : window.matchMedia('(prefers-color-scheme: dark)').matches
         if (dark) document.documentElement.classList.add('dark')
@@ -16,8 +16,8 @@
     <link href="/src/styles/index.css" rel="stylesheet" />
     <title>Mikis</title>
   </head>
-  <body>
-    <div id="root" class="bg-background min-h-screen"></div>
+  <body class="bg-background">
+    <div id="root" class="min-h-screen"></div>
     <script type="module" src="/src/app/main.tsx"></script>
   </body>
 </html>

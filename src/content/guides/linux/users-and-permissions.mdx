@@ -1,0 +1,206 @@
+---
+title: 'Linux Users and Permissions',
+description: 'Comprehensive guide on Linux users, groups, directories, chmod, and common commands.',
+date: '2026-03-08',
+---
+
+This guide covers everything you need to know about managing users on **Ubuntu/Linux**, including commands, directories, permissions, and best practices.
+
+## 1. Linux Users Overview
+
+In Linux, a **user** is an account that can log in and run processes. Every user has:
+
+- **Username**: e.g., `root`, `alice`, `deploy`
+- **User ID (UID)**: numeric identifier (root is `0`)
+- **Group ID (GID)**: primary group ID
+- **Home directory**: personal directory (e.g., `/home/alice`)
+- **Shell**: command interpreter (e.g., `/bin/bash`)
+
+**Types of users:**
+
+| Type          | Description                                      |
+| ------------- | ------------------------------------------------ |
+| Root          | Superuser with UID 0, can do anything            |
+| System users  | For running services (e.g., `www-data`, `mysql`) |
+| Regular users | Normal human accounts                            |
+
+---
+
+## 2. User Management Commands
+
+### Add a user
+
+```bash
+sudo adduser username
+```
+
+Creates a home directory (`/home/username`) and prompts for a password.
+
+### Delete a user
+
+```bash
+sudo deluser username
+sudo deluser --remove-home username  # deletes home directory too
+```
+
+### Modify a user
+
+- Change shell:
+
+```bash
+sudo chsh -s /bin/zsh username
+```
+
+- Add to a group:
+
+```bash
+sudo usermod -aG groupname username
+```
+
+- Change password:
+
+```bash
+passwd username
+```
+
+### View users
+
+```bash
+cat /etc/passwd
+```
+
+Contains all users, their UID, GID, home directory, and shell.
+
+---
+
+## 3. Groups
+
+Groups allow multiple users to share permissions.
+
+- Every user belongs to at least one group.
+
+### Commands:
+
+- Create a group:
+
+```bash
+sudo groupadd devs
+```
+
+- Add user to a group:
+
+```bash
+sudo usermod -aG devs alice
+```
+
+- List groups of a user:
+
+```bash
+groups alice
+```
+
+---
+
+## 4. Important Directories for Users
+
+| Directory        | Purpose               |
+| ---------------- | --------------------- |
+| `/home/username` | User’s personal files |
+| `/root`          | Root’s home directory |
+| `/etc/passwd`    | User account info     |
+| `/etc/shadow`    | Encrypted passwords   |
+| `/etc/group`     | Group info            |
+| `/var/log`       | System logs           |
+| `/tmp`           | Temporary files       |
+
+---
+
+## 5. File Permissions and `chmod`
+
+Linux uses **rwx** permissions for **user (owner), group, and others**.
+
+- **r** = read
+- **w** = write
+- **x** = execute
+
+Example of `ls -l` output:
+
+```bash
+-rwxr-xr-- 1 alice devs 1024 Mar 8 10:00 file.sh
+```
+
+| Field       | Meaning                                |
+| ----------- | -------------------------------------- |
+| `rwx` (1-3) | Owner permissions (read/write/execute) |
+| `r-x` (4-6) | Group permissions                      |
+| `r--` (7-9) | Others permissions                     |
+
+### chmod syntax
+
+1. **Numeric method**:
+
+```bash
+chmod 755 file.sh
+```
+
+- 7 = rwx
+- 5 = r-x
+- 5 = r-x
+
+2. **Symbolic method**:
+
+```bash
+chmod u+x file.sh    # add execute to user
+chmod g-w file.sh    # remove write from group
+chmod o+r file.sh    # add read for others
+```
+
+---
+
+## 6. Ownership: `chown` and `chgrp`
+
+- Change owner:
+
+```bash
+sudo chown alice file.txt
+```
+
+- Change group:
+
+```bash
+sudo chgrp devs file.txt
+```
+
+- Change both:
+
+```bash
+sudo chown alice:devs file.txt
+```
+
+---
+
+## 7. Useful Commands for Users and Permissions
+
+| Command         | Purpose                   |
+| --------------- | ------------------------- |
+| `whoami`        | Show current user         |
+| `id`            | Show user and group IDs   |
+| `groups`        | List groups of a user     |
+| `getent passwd` | Show all users            |
+| `getent group`  | Show all groups           |
+| `stat filename` | Show detailed permissions |
+
+---
+
+## 8. Best Practices
+
+1. Avoid using `root` for daily tasks. Use `sudo` instead.
+2. Give users only the permissions they need.
+3. Keep home directories private:
+
+```bash
+chmod 700 /home/username
+```
+
+4. Regularly check `/etc/passwd` and `/etc/group` for unnecessary users.
+5. Prefer SSH keys for login instead of passwords.

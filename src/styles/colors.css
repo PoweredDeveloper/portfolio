@@ -3,6 +3,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+  --color-code-background: var(--code-background);
+  --color-code-foreground: var(--code-foreground);
+
   --color-pale: var(--pale);
 
   --color-select-background: var(--select-background);
@@ -15,6 +18,9 @@
   --background: #fafafa;
   --foreground: #282828;
 
+  --code-background: #f6f6f6;
+  --code-foreground: #121212;
+
   --pale: #8a8a8a;
 
   --select-background: #373737;
@@ -26,6 +32,9 @@
 
   --background: #000000;
   --foreground: #ebebeb;
+
+  --code-background: #121212;
+  --code-foreground: #e0e0e0;
 
   --pale: #868686;
 

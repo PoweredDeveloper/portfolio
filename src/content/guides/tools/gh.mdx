@@ -1,0 +1,75 @@
+---
+title: GitHub CLI (gh)
+description: Use GitHub from the command line
+---
+
+# GitHub CLI (gh)
+
+The `gh` CLI lets you manage repositories, issues, and pull requests without leaving the terminal.
+
+## Installation
+
+```bash
+# macOS (Homebrew)
+brew install gh
+
+# Ubuntu/Debian
+sudo apt install gh
+
+# Authenticate
+gh auth login
+```
+
+## Repository Operations
+
+```bash
+# Clone a repo (interactive)
+gh repo clone owner/repo
+
+# Create a new repository
+gh repo create my-project --public --source=. --push
+
+# View repo in browser
+gh repo view --web
+
+# Fork a repository
+gh repo fork owner/repo
+```
+
+## Issues and Pull Requests
+
+```bash
+# List issues
+gh issue list
+
+# Create an issue
+gh issue create --title "Bug: ..." --body "Description"
+
+# List pull requests
+gh pr list
+
+# Create a pull request
+gh pr create --title "Add feature" --body "Description"
+
+# Check out a PR locally
+gh pr checkout 123
+
+# Merge a PR
+gh pr merge 123
+```
+
+## Useful Commands
+
+```bash
+# View current repo status
+gh status
+
+# Open in browser
+gh browse
+
+# Run GitHub Actions workflow
+gh workflow run "CI"
+
+# View workflow runs
+gh run list
+```

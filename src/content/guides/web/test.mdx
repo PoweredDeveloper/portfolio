@@ -1,0 +1,78 @@
+---
+title: Web Development Test Guide
+description: Sample guide with JavaScript, C++, and shell code examples
+---
+
+# Web Development Test Guide
+
+A quick reference with code snippets across different languages.
+
+## JavaScript Examples
+
+```javascript
+// Async/await with fetch
+async function fetchUser(id) {
+  const res = await fetch(`/api/users/${id}`)
+  if (!res.ok) throw new Error('Failed to fetch')
+  return res.json()
+}
+
+// Array methods
+const items = [1, 2, 3].map((n) => n * 2)
+const sum = items.reduce((a, b) => a + b, 0)
+```
+
+Inline code: `console.log('hello')` and `Array.from()`.
+
+## C++ Snippets
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> nums = {1, 2, 3, 4, 5};
+  for (const auto& n : nums) {
+    std::cout << n * 2 << " ";
+  }
+  return 0;
+}
+```
+
+```cpp
+// Smart pointers
+auto ptr = std::make_unique<std::string>("hello");
+std::shared_ptr<int> shared = std::make_shared<int>(42);
+```
+
+## Shell Commands
+
+```bash
+# Create project and install deps
+mkdir my-app && cd my-app
+pnpm init
+pnpm add react react-dom
+
+# Run dev server
+pnpm run dev
+```
+
+```bash
+# Git workflow
+git checkout -b feature/new-thing
+git add .
+git commit -m "Add new feature"
+git push origin feature/new-thing
+```
+
+## JSON Config
+
+```json
+{
+  "name": "my-project",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  }
+}
+```
