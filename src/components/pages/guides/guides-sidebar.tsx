@@ -121,7 +121,7 @@ export default function GuidesSidebar() {
   return (
     <aside className="my-8 hidden w-48 shrink-0 lg:block">
       <nav className="sticky top-24 space-y-1">
-        <Link to="/guides" className="text-pale hover:text-foreground mb-2 block flex items-center text-sm hover:underline">
+        <Link to="/guides" className="text-pale hover:text-foreground mb-2 flex items-center text-sm hover:underline">
           <GrFormNextLink className="mr-1 rotate-180" /> All Guides
         </Link>
         <select

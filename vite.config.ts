@@ -6,6 +6,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
+import rehypeSlug from 'rehype-slug'
 import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
@@ -17,7 +18,7 @@ export default defineConfig({
       enforce: 'pre',
       ...mdx({
         remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm],
-        rehypePlugins: [rehypeHighlight],
+        rehypePlugins: [rehypeSlug, rehypeHighlight],
         providerImportSource: path.resolve(__dirname, 'src/components/pages/guides/mdx-components.tsx'),
       }),
     },

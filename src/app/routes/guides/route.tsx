@@ -14,7 +14,7 @@ function GuidesLayout() {
   }
 
   return (
-    <div className="font-ibm-mono mx-auto flex max-w-5xl gap-8 px-4 py-8">
+    <div className="font-ibm-mono mx-auto flex max-w-7xl gap-8 px-4 py-8">
       <GuidesSidebar />
       <article className="min-w-0 flex-1">
         <Outlet />
