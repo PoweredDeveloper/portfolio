@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/cn'
-import { useHeadings } from './headings-context'
+import { useHeadings } from './headings'
 
-export type { TocItem } from './headings-context'
+export type { TocItem } from './headings'
 
 interface GuideTocProps {
   className?: string
